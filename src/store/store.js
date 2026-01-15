@@ -9,6 +9,7 @@ export const useMainStore = defineStore('main', {
     loading: false,
     error: null,
     campagne:null,
+    data_find:false
   }),
 
   actions: {

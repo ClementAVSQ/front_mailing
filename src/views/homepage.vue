@@ -1,17 +1,17 @@
 <script setup>
-import entreprise from '../components/hompage/entreprise.vue';
-import list_contact from '../components/hompage/list_contact.vue';
-import campagne from '../components/hompage/campagne.vue';
+import entreprise from '../components/homepage/entreprise.vue';
+import list_contact from '../components/homepage/list_contact.vue';
+import campagne from '../components/homepage/campagne.vue';
 </script>
 
 <template>
+  <div>
+    <entreprise />
+    <list_contact />
     <div>
-        <entreprise />
-        <list_contact />
-        <div>
-            <campagne />
-        </div>
+      <campagne />
     </div>
+  </div>
 </template>
 
 <style scoped>

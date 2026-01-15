@@ -6,6 +6,7 @@ import { useMainStore } from "../../store/store";
 let store = useMainStore();
 let contacts = ref([]);
 
+//filtrer les contacts en fonction de l'entreprise sélectionnée
 const filteredContacts = computed(() => {
     if (store.id_entreprise !== null) {
         return contacts.value.filter(c => c.entreprise_id === store.id_entreprise)
@@ -13,7 +14,7 @@ const filteredContacts = computed(() => {
     return contacts.value;
 }
 );
-
+//récuperation des contacts associés aux entreprises
 fetch(`${import.meta.env.VITE_BACK_END}/api/client/bycompany`)
     .then(response => response.json())
     .then(data => {
@@ -27,14 +28,18 @@ fetch(`${import.meta.env.VITE_BACK_END}/api/client/bycompany`)
 
 
 <template>
-    <div id="page">
-        <h2>Contact</h2>
-        <ul>
-            <li v-for="client in filteredContacts"> {{ client.mail }}</li>
-        </ul>
-        <button>envoyer une campagne</button>
-    </div>
-
+  <div id="page">
+    <h2>Contact</h2>
+    <ul>
+      <li
+        v-for="client in filteredContacts"
+        :key="client.id"
+      >
+        {{ client.mail }}
+      </li>
+    </ul>
+    <button>envoyer une campagne</button>
+  </div>
 </template>
 
 <style scoped>

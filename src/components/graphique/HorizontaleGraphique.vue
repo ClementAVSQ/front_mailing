@@ -17,27 +17,27 @@ const config = ref({
             datapointLeave: null,
             datapointClick: null
         },
-        style: {
+         style: {
             fontFamily: 'inherit',
             chart: {
                 backgroundColor: '#FFFFFFff',
                 color: '#1A1A1Aff',
-                width: 600,
-                height: 150,
+                width: 512,
+                height: 100,
                 layout: {
                     bars: {
                         sort: 'desc',
-                        useStroke: true,
+                        useStroke: false,
                         strokeWidth: 2,
                         height: 32,
-                        gap: 10,
+                        gap: 6,
                         borderRadius: 4,
                         offsetX: 12,
                         paddingRight: 0,
                         useGradient: true,
                         gradientIntensity: 20,
                         fillOpacity: 90,
-                        underlayerColor: 'rgba(255, 255, 255, 1)',
+                        underlayerColor: '#FFFFFF',
                         dataLabels: {
                             color: '#1A1A1Aff',
                             bold: true,
@@ -189,7 +189,7 @@ const config = ref({
         },
         table: {
             show: false,
-            responsiveBreakpoint: 400,
+            responsiveBreakpoint: 600,
             useDialog: false,
             th: {
                 backgroundColor: '#FFFFFFff',
@@ -210,21 +210,18 @@ const config = ref({
             parentName: 'Group',
             childName: 'Serie',
             value: 'Value',
-            percentageToTotal: '% / total',
-            percentageToSerie: '% / group'
+            percentageToTotal: '% ',
+            percentageToSerie: '%'
         }
     });
 
-// accept dataset, title and subtitle as props (with sensible defaults)
+// on récupere les props passées au composant
 const props = defineProps({
     dataset: {
         type: Array,
         default: () => ([
-            { name: 'Serie A', value: 55, color: '#1f77b4', children: [] },
-            { name: 'Serie B', value: 34, color: '#aec7e8', children: [] },
-            { name: 'Serie C', value: 21, color: '#ff7f0e', children: [] },
-            { name: 'Serie D', value: 13, color: '#ffbb78', children: [] },
-            { name: 'Serie E', value: 8, color: '#2ca02c', children: [] }
+            { name: 'Aucune valeur trouver veuillez faire ', value: 1, color: '#1f77b4', children: [] },
+
         ])
     },
     title: {
@@ -239,7 +236,7 @@ const props = defineProps({
 
 const dataset = computed(() => props.dataset);
 
-// computed config that injects the dynamic title/subtitle into the base config
+// on crée une configuration dynamique pour mettre à jour le titre et le sous-titre
 const dynamicConfig = computed(() => ({
     ...config.value,
     style: {
@@ -260,17 +257,23 @@ const dynamicConfig = computed(() => ({
 
 </script>
 <template>
-    <!-- Using a wrapper is optional -->
-    <div :style="{ width: '700px'}" id="position">
-        <VueUiHorizontalBar
-            :config="dynamicConfig"
-            :dataset="dataset"
-        />
-    </div>
+  <div
+    id="position"
+    :style="{ width: '1200px'}"
+  >
+    <VueUiHorizontalBar
+      :config="dynamicConfig"
+      :dataset="dataset"
+    />
+  </div>
 </template>
 
 <style scoped>
     #position {
         margin-top: 100px;
-    }
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        align-self: flex-end;
+         }
 </style>

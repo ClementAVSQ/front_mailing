@@ -4,24 +4,25 @@ import { useMainStore } from "../../store/store";
 let store = useMainStore();
 
 const Entreprises = ref([]);
-store.setLoading(true);
+
+//récuperation des entreprises
 fetch(`${import.meta.env.VITE_BACK_END}/api/company`)
     .then(response => response.json())
     .then(data => {
         Entreprises.value = data.data;
-        store.setLoading(false);
     })
     .catch(err => {
         console.error(err);
-        store.setLoading(false);
     });
 
 
+//au clic sur une entreprise on récupère son id
 function getEntreprises(id) {
     store.id_entreprise = id;
     console.log(store.id_entreprise);
 }
 
+//au clic sur toute les entreprises on remet l'id à null
 function getAllEntreprises() {
     store.id_entreprise = null;
     console.log(store.id_entreprise);
@@ -29,13 +30,21 @@ function getAllEntreprises() {
 </script>
 
 <template>
-    <div id="list">
-        <h2>Entreprise</h2>
-        <ul>
-            <li v-for="entreprise in Entreprises" :key="entreprise.id" @click="getEntreprises(entreprise.id)">{{ entreprise.entreprise }}</li>
-        </ul>
-        <button @click="getAllEntreprises()"> toute les entreprises</button>
-    </div>
+  <div id="list">
+    <h2>Entreprise</h2>
+    <ul>
+      <li
+        v-for="entreprise in Entreprises"
+        :key="entreprise.id"
+        @click="getEntreprises(entreprise.id)"
+      >
+        {{ entreprise.entreprise }}
+      </li>
+    </ul>
+    <button @click="getAllEntreprises()">
+      toute les entreprises
+    </button>
+  </div>
 </template>
 <style scoped>
 

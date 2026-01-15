@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import { VueUiDonut } from "vue-data-ui";
 import "vue-data-ui/style.css"; // If you are using multiple components, place this style import in your main
 
+//config préfaite et modifiable sur https://vue-data-ui.graphieros.com/docs#vue-ui-sparkstackbar
 const config = ref({
     table: {
         th: {
@@ -71,10 +72,11 @@ const config = ref({
         }
     }
 });
-
+// on définit les props du composant
 const props = defineProps({
     dataset: {
         type: Array,
+        //et les valeurs pas défault
         default: () => ([
             { name: 'Series 1', values: [100] },
             { name: 'Series 2', values: [50] },
@@ -92,6 +94,7 @@ const props = defineProps({
     }
 });
 
+// on crée une configuration dynamique pour mettre à jour le titre et le sous-titre
 const dynamicConfig = computed(() => ({
     ...config.value,
     style: {
@@ -114,15 +117,22 @@ const dataset = computed(() => props.dataset);
 
 </script>
 <template>
-    <div :style="{ width: '700px' }" id="position">
-        <VueUiDonut :config="dynamicConfig" :dataset="dataset">
-            <!-- SLOTS -->
-
-        </VueUiDonut>
-    </div>
+  <div
+    id="position"
+    :style="{ width: '700px' }"
+  >
+    <VueUiDonut
+      :config="dynamicConfig"
+      :dataset="dataset"
+    />
+  </div>
 </template>
 <style scoped>
+
+
 #position {
+    display: flex;
+    justify-content: end;
     margin-top: 100px;
 }
 </style>

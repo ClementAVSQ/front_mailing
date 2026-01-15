@@ -2,14 +2,13 @@
 import { ref } from "vue";
 import { useMainStore } from "../../store/store";
 let store = useMainStore();
-
 let campagnes = ref([]);
-store.setLoading(true);
+
+//récuperation des campagnes
 fetch(`${import.meta.env.VITE_BACK_END}/api/campaign`)
     .then(response => response.json())
     .then(data => {
         campagnes.value = data.data;
-        store.setLoading(false);
     })
     .catch(err => {
         console.error(err);
@@ -21,12 +20,20 @@ function selectCampagne(name) {
 
 </script>
 <template>
-    <div id="content">
-        <h2>LES CAMPAGNES ENVOYÉ</h2>
-        <ul>
-            <router-link :to="`/campagne/${campagne.name}`"v-for="campagne in campagnes"><li   @click="selectCampagne(campagne.id)" > {{ campagne.name }}</li></router-link>
-        </ul>
-    </div>
+  <div id="content">
+    <h2>LES CAMPAGNES ENVOYÉ</h2>
+    <ul>
+      <router-link
+        v-for="campagne in campagnes"
+        :key="campagne.id"
+        :to="`/campagne/${campagne.name}`"
+      >
+        <li @click="selectCampagne(campagne.id)">
+          {{ campagne.name }}
+        </li>
+      </router-link>
+    </ul>
+  </div>
 </template>
 <style scoped>
 
