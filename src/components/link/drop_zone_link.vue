@@ -33,7 +33,7 @@ const uploadCsv = async () => {
         // Renommer le fichier avec l'ID campagne
         const renamedFile = new File(
             [selectedFile.value],
-            `${props.id_campaign}.csv`,
+            `${props.idCampaign}.csv`,
             { type: selectedFile.value.type }
         );
 

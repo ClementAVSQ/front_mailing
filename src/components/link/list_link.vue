@@ -147,7 +147,7 @@ onMounted(() => {
   >
     <h2>Liste des cliqueurs en fonction des liens</h2>
     <drop_zone_link
-      :id_campaign="props.id_campaign"
+      :id-campaign="props.idCampaign"
       @upload="handleUpload"
     />
   </div>

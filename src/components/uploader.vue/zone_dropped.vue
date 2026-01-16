@@ -34,13 +34,13 @@ const sendCsv = async () => {
         // CrÇ¸ation d'un nouveau fichier avec le nom voulu
         const renamedFile = new File(
             [file.value],
-            `${props.id_campaign}.csv`,
+            `${props.idCampaign}.csv`,
             { type: file.value.type }
         );
 
         const fileData = await renamedFile.arrayBuffer();
         const result = await window.electronAPI.uploadCsv({
-            idCampaign: props.id_campaign,
+            idCampaign: props.idCampaign,
             fileData
         });
 
