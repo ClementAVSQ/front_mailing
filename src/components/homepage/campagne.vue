@@ -1,6 +1,13 @@
 <script setup>
 import { ref } from "vue";
 import { useMainStore } from "../../store/store";
+const props = defineProps({
+    isMain: {
+        type: Boolean,
+        default: true
+    }
+});
+const emit = defineEmits(["select-campaign"]);
 let store = useMainStore();
 let campagnes = ref([]);
 
@@ -18,20 +25,37 @@ function selectCampagne(name) {
     store.campagne = name;
 }
 
+function handleClick(campagne) {
+    if (props.isMain) {
+        selectCampagne(campagne.id);
+        return;
+    }
+    emit("select-campaign", campagne.id);
+}
+
 </script>
 <template>
   <div id="content">
     <h2>LES CAMPAGNES ENVOYÉ</h2>
     <ul>
-      <router-link
-        v-for="campagne in campagnes"
-        :key="campagne.id"
-        :to="`/campagne/${campagne.name}`"
-      >
-        <li @click="selectCampagne(campagne.id)">
+      <template v-for="campagne in campagnes">
+        <router-link
+          v-if="props.isMain"
+          :key="`link-${campagne.id}`"
+          :to="`/campagne/${campagne.name}`"
+        >
+          <li @click="handleClick(campagne)">
+            {{ campagne.name }}
+          </li>
+        </router-link>
+        <li
+          v-else
+          :key="`item-${campagne.id}`"
+          @click="handleClick(campagne)"
+        >
           {{ campagne.name }}
         </li>
-      </router-link>
+      </template>
     </ul>
   </div>
 </template>

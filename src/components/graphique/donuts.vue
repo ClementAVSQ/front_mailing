@@ -91,6 +91,10 @@ const props = defineProps({
     subtitle: {
         type: String,
         default: 'Subtitle'
+    },
+    width: {
+        type: String,
+        default: '600px'
     }
 });
 
@@ -119,7 +123,7 @@ const dataset = computed(() => props.dataset);
 <template>
   <div
     id="position"
-    :style="{ width: '700px' }"
+    :style="{ width: props.width }"
   >
     <VueUiDonut
       :config="dynamicConfig"

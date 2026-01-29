@@ -231,7 +231,11 @@ const props = defineProps({
     subtitle: {
         type: String,
         default: ''
-    }
+    },
+    width: {
+        type: String,
+        default: '1200px'
+    }   
 });
 
 const dataset = computed(() => props.dataset);
@@ -259,7 +263,7 @@ const dynamicConfig = computed(() => ({
 <template>
   <div
     id="position"
-    :style="{ width: '1200px'}"
+    :style="{ width: props.width }"
   >
     <VueUiHorizontalBar
       :config="dynamicConfig"

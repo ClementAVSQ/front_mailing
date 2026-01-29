@@ -8,6 +8,14 @@ const props = defineProps({
     idCampaign: {
         type: String,
         required: true
+    },
+    dropZoneWidth: {
+        type: [Number, String],
+        default: 1200
+    },
+    array_width: {
+        type: [Number, String],
+        default: 1200
     }
 });
 
@@ -92,6 +100,7 @@ onMounted(() => {
   >
     <zone_dropped
       :id-campaign="props.idCampaign"
+      :width="props.dropZoneWidth"
       @upload="handleUpload"
     />
   </div>
@@ -99,6 +108,7 @@ onMounted(() => {
     <carousel_link
       :dataset="data_csv"
       title="lien du template:"
+      :width="props.array_width"
     />
     <button @click="del_data_link">
       Supprimer le fichier de liens
@@ -108,7 +118,7 @@ onMounted(() => {
 
 <style scoped>
 h2 {
-    width: 1200px;
+    width: 90%;
     align-self: end;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 36px;

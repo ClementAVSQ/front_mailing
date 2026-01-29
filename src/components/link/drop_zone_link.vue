@@ -6,6 +6,10 @@ const props = defineProps({
     idCampaign: {
         type: String,
         required: true
+    },
+    width: {
+        type: [Number, String],
+        default: 1200
     }
 });
 
@@ -73,7 +77,10 @@ const uploadCsv = async () => {
 </script>
 
 <template>
-  <div class="upload-container">
+  <div
+    class="upload-container"
+    :style="{ '--drop-width': typeof props.width === 'number' ? `${props.width}px` : props.width }"
+  >
     <input 
       type="file" 
       accept=".csv" 
@@ -113,7 +120,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1200px;
+    width: var(--drop-width, 1200px);
     height: 200px;
     border: 2px dashed #ccc;
     text-align: center;

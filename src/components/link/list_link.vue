@@ -6,6 +6,10 @@ const props = defineProps({
     idCampaign: {
         type: String,
         required: true
+    },
+    dropZoneWidth: {
+        type: [Number, String],
+        default: 1200
     }
 });
 
@@ -148,6 +152,7 @@ onMounted(() => {
     <h2>Liste des cliqueurs en fonction des liens</h2>
     <drop_zone_link
       :id-campaign="props.idCampaign"
+      :width="props.dropZoneWidth"
       @upload="handleUpload"
     />
   </div>

@@ -12,6 +12,10 @@ const props = defineProps({
   dataset: {
     type: Array,
     default: () => []
+  },
+  width: {
+    type: String,
+    default: "600px"
   }
 });
 
@@ -79,7 +83,7 @@ watch(
 </script>
 
 <template>
-  <div :style="{ width: '600px' }">
+  <div :style="{ width: props.width }">
     <VueUiSparkStackbar
       :config="config"
       :dataset="dataset"
